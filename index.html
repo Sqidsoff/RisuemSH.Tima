@@ -2,24 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>furry gay femboy</title>
     <script src="JS/script.js" defer></script>
     <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
 <header></header>
 <main>
-    <div class="d-flex">
+    <form id="form" novalidate>
+        <div class="input-header">
+            <label for="mail">Email:</label>
+            <span class="error"></span>
+        </div>
 
-        <input type="number" id="size" placeholder="Size">
-        <input type="color" id="color">
+        <input type="email" id="mail">
 
-        <button id="random">Random color</button>
-        <button id="create">Create</button>
-        <button id="clear">Clear</button>
+        <div class="input-header">
+            <label for="password">Password</label>
+            <span class="error"></span>
+        </div>
+        <input type="password" id="password" required/>
 
-        <table id="paintspace"></table>
-    </div>
+        <div class="input-header">
+            <label for="passwordr" id="passwordrlabel">Reapet password</label>
+            <span class="error"></span>
+        </div>
+        <input type="password" id="passwordr" required/>
+
+        <input type="button" value="Submit" id="Submit"/>
+    </form>
 </main>
 <footer></footer>
 </body>

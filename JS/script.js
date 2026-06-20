@@ -1,79 +1,73 @@
-const paintspace = document.getElementById('paintspace');
-const sizeInput = document.getElementById('size');
-const color = document.getElementById('color');
-const createb = document.getElementById('create');
-const randomb = document.getElementById('random');
-const clearb = document.getElementById('clear');
+const email = document.getElementById('mail');
+const password = document.getElementById('password');
+const passwordr = document.getElementById('passwordr');
+const Error = document.getElementsByClassName('error');
 
-let mouseDwn = false;
-let mouseB = 0;
+const MR = /^[a-zA-Z0-9._-]{3,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const PR = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
 
-createb.addEventListener('click', create);
-randomb.addEventListener('click', random);
-clearb.addEventListener('click', clear);
-document.addEventListener('mousedown', (e) => {mouseDwn = true;mouseB = e.button;});
-document.addEventListener('mouseup', () => {mouseDwn = false;});
-paintspace.addEventListener('contextmenu', (e) => {e.preventDefault();});
 
-function create() {
-    let size = Number(sizeInput.value);
+function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
 
-    paintspace.innerHTML = '';
+    document.cookie =
+        name + "=" + encodeURIComponent(value) +
+        "; expires=" + date.toUTCString() +
+        "; path=/";
+}
 
-    for (let i = 0; i < size; i++) {
-        let tr = document.createElement('tr');
+function getCookie(name) {
+    const cookies = document.cookie.split("; ")
 
-        for (let j = 0; j < size; j++) {
-            let td = document.createElement('td');
+    for(let i = 0; i< cookies.length; i++){
+        let parts = cookies[i].split("=")
+        let cookieName = parts[0]
+        let cookieValue = parts[1]
 
-            td.addEventListener('mousedown', draw);
-            td.addEventListener('mouseover', drawMove);
-
-            tr.append(td);
+        if (cookieName === name){
+            return decodeURIComponent(cookieValue)
         }
-
-        paintspace.append(tr);
     }
 }
 
-function draw(e) {
-    if (e.button === 0) {
-        e.target.style.backgroundColor = color.value;
-    }
-
-    if (e.button === 2) {
-        e.target.style.backgroundColor = '';
-    }
+function deleteCookie(name) {
+    document.cookie = `${name}=; max-age=0; path=/`;
 }
 
-function drawMove(e) {
-    if (!mouseDwn) return;
+document.getElementById('Submit').addEventListener('click', () => {
+    let validform = true;
+    let emailVal = email.value;
+    let passVal = password.value;
+    let passrVal = passwordr.value;
 
-    if (mouseB === 0) {
-        e.target.style.backgroundColor = color.value;
+    if (!MR.test(emailVal)){
+        console.log('email');
+        Error[0].textContent = 'Error email position missmatch';
+        validform = false;
     }
-
-    if (mouseB === 2) {
-        e.target.style.backgroundColor = '';
+    else{
+        Error[0].textContent = '';
     }
-}
-
-function random() {
-    let r = Math.floor(Math.random() * 256);
-    let g = Math.floor(Math.random() * 256);
-    let b = Math.floor(Math.random() * 256);
-
-    color.value =
-        '#' +
-        r.toString(16).padStart(2, '0') +
-        g.toString(16).padStart(2, '0') +
-        b.toString(16).padStart(2, '0');
-}
-
-function clear() {
-    let cells = paintspace.querySelectorAll('td');
-
-    cells.forEach(cell => {
-        cell.style.backgroundColor = '';
-    });
-}
+    if (!PR.test(passVal)){
+        console.log('pass');
+        Error[1].textContent = 'Error password position missmatch';
+        validform = false;
+    }
+    else{
+        Error[1].textContent = '';
+    }
+    if (passrVal !== passVal){
+        console.log('pass rep');
+        Error[2].textContent = 'Error Password mismatch';
+        validform = false;
+    }
+    else{
+        Error[2].textContent = '';
+    }
+    if (validform){
+        setCookie('email', emailVal, 30);
+        console.log('REDIRECT');
+        location.href = './profile.html';
+    }
+});

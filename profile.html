@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Finetiks net ne stranii</title>
+    <script src="JS/pscript.js" defer></script>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+<main class="profile-page">
+    <div class="profile-box">
+
+        <div class="profile-top">
+            <span>Hello, <span id="Umail"></span>!</span>
+            <a id="exit">exit</a>
+        </div>
+
+        <hr>
+
+        <h1>User info</h1>
+
+        <form id="profileForm" class="profile-form">
+            <div>
+                <div class="input-header">
+                <label>First Name:</label>
+                <span class="error"></span>
+                </div>
+                <input type="text" id="fname">
+            </div>
+
+            <div>
+                <div class="input-header">
+                    <label>Last Name:</label>
+                    <span class="error"></span>
+                </div>
+                <input type="text" id="lname">
+            </div>
+
+            <div>
+                <div class="input-header">
+                <label>Year of birth:</label>
+                <span class="error"></span>
+                </div>
+                <input type="number" id="yrbth">
+            </div>
+
+            <div>
+                <div class="input-header">
+                <label>Gender:</label>
+                <select id="gender">
+                    <option>male</option>
+                    <option>female</option>
+                </select>
+                </div>
+            </div>
+
+            <div>
+                <div class="input-header">
+                    <label>Phone number:</label>
+                    <span class="error"></span>
+                </div>
+                <input type="tel" id="number"/>
+            </div>
+            <div>
+                <div class="input-header">
+                    <label>Skype:</label>
+                    <span class="error"></span>
+                </div>
+                <input type="text" id="skype">
+            </div>
+            <input type="button" value="Submit" id="Submit"/>
+        </form>
+    </div>
+</main>
+</body>
+</html>
